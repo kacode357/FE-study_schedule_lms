@@ -1,0 +1,19 @@
+services:
+  istudy-fe:
+    image: ghcr.io/kacode357/istudy-fe:latest
+    container_name: istudy_fe
+    restart: unless-stopped
+    expose:
+      - "3000"
+    networks:
+      - traefik-proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.istudy-fe.rule=Host(`istudy.quangde.cloud`)"
+      - "traefik.http.routers.istudy-fe.entrypoints=websecure"
+      - "traefik.http.routers.istudy-fe.tls.certresolver=letsencrypt"
+      - "traefik.http.services.istudy-fe.loadbalancer.server.port=3000"
+
+networks:
+  traefik-proxy:
+    external: true

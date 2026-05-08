@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactStrictMode: false, // Tắt StrictMode để tránh gọi API 2 lần trong dev
+  reactStrictMode: false,
+  output: 'standalone', // Build nhỏ gọn cho Docker
 };
 
 export default nextConfig;
