@@ -6,7 +6,7 @@ services:
     expose:
       - "3000"
     networks:
-      - traefik-proxy
+      - fe_network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.istudy-fe.rule=Host(`istudy.quangde.cloud`)"
@@ -15,5 +15,5 @@ services:
       - "traefik.http.services.istudy-fe.loadbalancer.server.port=3000"
 
 networks:
-  traefik-proxy:
-    external: true
+  fe_network:
+    driver: bridge
