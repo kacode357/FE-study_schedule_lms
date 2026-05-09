@@ -114,12 +114,13 @@ export default function LoginPage() {
               'Đăng nhập →'
             )}
           </button>
-          <p className="mt-6 text-center text-sm text-slate-500">
-            Chưa có tài khoản?{' '}
-            <Link href="/register" className="text-indigo-400 hover:text-cyan-400 font-medium transition-colors">
-              Đăng ký ngay
-            </Link>
-          </p>
+        </form>
+        <p className="mt-6 text-center text-sm text-slate-500">
+          Chưa có tài khoản?{' '}
+          <Link href="/register" className="text-indigo-400 hover:text-cyan-400 font-medium transition-colors">
+            Đăng ký ngay
+          </Link>
+        </p>
 
           <div className="mt-8">
             <div className="relative">
