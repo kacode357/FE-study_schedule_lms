@@ -19,7 +19,7 @@ export function useAuth() {
       const { data } = await AuthService.login(payload);
       // data = { success: true, data: { token, user } }
       const { token, user } = data.data;
-      localStorage.setItem('token', token);
+      if (token) localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       router.push('/home');
     } catch (err: unknown) {
@@ -70,7 +70,7 @@ export function useAuth() {
       const { data } = await AuthService.register(payload);
       // data = { success: true, data: { token, user } }
       const { token, user } = data.data;
-      localStorage.setItem('token', token);
+      if (token) localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       router.push('/home');
     } catch (err: unknown) {
