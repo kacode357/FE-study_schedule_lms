@@ -79,7 +79,7 @@ export default function HomePage() {
             {/* Greeting */}
             <div>
               <h1 className="text-3xl font-bold text-slate-100">
-                Xin chào, <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">{profile.fullName}</span> 👋
+                Xin chào, <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">{profile.full_name}</span> 👋
               </h1>
               <p className="text-slate-500 mt-2">Chào mừng bạn trở lại với iStudy LMS</p>
             </div>
@@ -99,7 +99,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 mb-0.5">Họ và tên</p>
-                    <p className="text-slate-100 font-medium">{profile.fullName}</p>
+                    <p className="text-slate-100 font-medium">{profile.full_name}</p>
                   </div>
                 </div>
 
@@ -135,7 +135,7 @@ export default function HomePage() {
                   <div>
                     <p className="text-xs text-slate-500 mb-0.5">Ngày tham gia</p>
                     <p className="text-slate-100 font-medium">
-                      {new Date(profile.createdAt).toLocaleDateString('vi-VN', {
+                      {new Date(profile.created_at).toLocaleDateString('vi-VN', {
                         day: '2-digit', month: '2-digit', year: 'numeric'
                       })}
                     </p>

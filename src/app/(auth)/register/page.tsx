@@ -13,7 +13,7 @@ interface RegisterForm extends RegisterPayload {
 export default function RegisterPage() {
   const { register, loading, error, clearError } = useAuth();
   const [form, setForm] = useState<RegisterForm>({
-    fullName: '',
+    full_name: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -41,7 +41,7 @@ export default function RegisterPage() {
     }
 
     await register({
-      fullName: form.fullName,
+      full_name: form.full_name,
       email: form.email,
       password: form.password,
     });
@@ -75,17 +75,17 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Full Name */}
           <div className="space-y-2">
-            <label htmlFor="fullName" className="text-sm font-medium text-slate-400">
+            <label htmlFor="full_name" className="text-sm font-medium text-slate-400">
               Họ và tên
             </label>
             <div className="relative">
               <UserRound className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 pointer-events-none" />
               <input
-                id="fullName"
-                name="fullName"
+                id="full_name"
+                name="full_name"
                 type="text"
                 placeholder="Nguyễn Văn A"
-                value={form.fullName}
+                value={form.full_name}
                 onChange={handleChange}
                 required
                 autoComplete="name"

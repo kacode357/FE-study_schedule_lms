@@ -6,5 +6,5 @@ export interface LoginPayload {
 export interface RegisterPayload {
   email: string;
   password: string;
-  fullName: string;
+  full_name: string;
 }
