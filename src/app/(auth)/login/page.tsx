@@ -4,10 +4,11 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Eye, EyeOff, BookOpen, Loader2, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import type { LoginPayload } from '@/payload/auth.payload';
 
 export default function LoginPage() {
-  const { login, loading, error, clearError } = useAuth();
+  const { login, googleLogin, loading, error, clearError } = useAuth();
   const [form, setForm] = useState<LoginPayload>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -21,8 +22,11 @@ export default function LoginPage() {
     await login(form);
   };
 
+  const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '1064673826920-9b4e579lg96tf2giiuobfjd5agjptb1u.apps.googleusercontent.com';
+
   return (
-    <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center p-4 relative overflow-hidden">
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated blobs */}
       <div className="absolute top-[-100px] left-[-100px] w-[500px] h-[500px] rounded-full bg-indigo-600/20 blur-[100px] animate-pulse" />
       <div className="absolute bottom-[-80px] right-[-80px] w-[400px] h-[400px] rounded-full bg-cyan-500/15 blur-[100px] animate-pulse [animation-delay:2s]" />
@@ -110,15 +114,41 @@ export default function LoginPage() {
               'Đăng nhập →'
             )}
           </button>
-        </form>
+          <p className="mt-6 text-center text-sm text-slate-500">
+            Chưa có tài khoản?{' '}
+            <Link href="/register" className="text-indigo-400 hover:text-cyan-400 font-medium transition-colors">
+              Đăng ký ngay
+            </Link>
+          </p>
 
-        <p className="mt-6 text-center text-sm text-slate-500">
-          Chưa có tài khoản?{' '}
-          <Link href="/register" className="text-indigo-400 hover:text-cyan-400 font-medium transition-colors">
-            Đăng ký ngay
-          </Link>
-        </p>
+          <div className="mt-8">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-white/[0.08]" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-[#121226] px-2 text-slate-400">Hoặc</span>
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  if (credentialResponse.credential) {
+                    googleLogin(credentialResponse.credential);
+                  }
+                }}
+                onError={() => {
+                  console.error('Đăng nhập Google thất bại');
+                }}
+                theme="filled_black"
+                shape="pill"
+                text="continue_with"
+              />
+            </div>
+          </div>
       </div>
-    </div>
+      </div>
+    </GoogleOAuthProvider>
   );
 }

@@ -8,6 +8,10 @@ const AuthService = {
   login: (payload: LoginPayload) =>
     axiosInstance.post<ApiResponse<AuthData>>('/auth/login', payload),
 
+  // POST /auth/google → { success: true, data: { token, user } }
+  googleLogin: (id_token: string) =>
+    axiosInstance.post<ApiResponse<AuthData>>('/auth/google', { id_token }),
+
   // POST /auth/register → { success: true, data: { token, user } }
   register: (payload: RegisterPayload) =>
     axiosInstance.post<ApiResponse<AuthData>>('/auth/register', payload),
